@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package rpcapi;
+
+import "github.com/jstang9527/buoy/micro/proto/model/common.proto";
+
+service Victim {
+    rpc Communication (model.Request) returns (model.Response);
+}
