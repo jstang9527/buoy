@@ -1,0 +1,67 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {},
+        "license": {}
+    },
+    "paths": {
+        "/demo/info": {
+            "get": {
+                "description": "模板简介",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "模板"
+                ],
+                "summary": "模板-Demo",
+                "operationId": "/demo/info",
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/middleware.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "middleware.Response": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "object"
+                },
+                "errmsg": {
+                    "type": "string"
+                },
+                "errno": {
+                    "type": "integer"
+                },
+                "stack": {
+                    "type": "object"
+                },
+                "trace_id": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,40 @@
+definitions:
+  middleware.Response:
+    properties:
+      data:
+        type: object
+      errmsg:
+        type: string
+      errno:
+        type: integer
+      stack:
+        type: object
+      trace_id:
+        type: object
+    type: object
+info:
+  contact: {}
+  license: {}
+paths:
+  /demo/info:
+    get:
+      consumes:
+      - application/json
+      description: 模板简介
+      operationId: /demo/info
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            allOf:
+            - $ref: '#/definitions/middleware.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 模板-Demo
+      tags:
+      - 模板
+swagger: "2.0"
