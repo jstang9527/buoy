@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	lib.InitModule("./conf/dev/", []string{"base"})
+	lib.InitModule("./conf/dev/", []string{"base", "micro", "redis"})
 	defer lib.Destroy()
 
 	router.HTTPServerRun()

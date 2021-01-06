@@ -34,5 +34,15 @@ func InitRouter(middlewares ...gin.HandlerFunc) *gin.Engine {
 		// middleware.IPAuthMiddleware(),
 	)
 	controller.DemoRegister(demoRouter)
+
+	// trojan
+	trojanRouter := router.Group("/trojan")
+	trojanRouter.Use(
+		middleware.RecoveryMiddleware(),
+		middleware.RequestLog(),
+		// middleware.IPAuthMiddleware(),
+		middleware.TranslationMiddleware(),
+	)
+	controller.TrojanRegister(trojanRouter)
 	return router
 }
