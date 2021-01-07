@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package rpcapi;
+option go_package = "rpcapi";
+
+message VerifyRequest {
+    string cmd = 1;
+}
+
+message VerifyResponse {
+    string msg = 1;
+}
+
+service PocScan {
+    rpc VerifyPoc (VerifyRequest) returns (VerifyResponse);
+}
