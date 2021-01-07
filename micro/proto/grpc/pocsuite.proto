@@ -1,16 +1,24 @@
-syntax = "proto3";
+syntax = "proto3"; // 指定proto版本
+package grpc;   // 指定默认包名
 
-package rpcapi;
-option go_package = "rpcapi";
+// 指定golang包名
+option go_package = "grpc";
 
-message VerifyRequest {
-    string cmd = 1;
-}
-
-message VerifyResponse {
-    string msg = 1;
-}
-
+// 定义算术服务
 service PocScan {
-    rpc VerifyPoc (VerifyRequest) returns (VerifyResponse);
+    // 定义相加方法
+    rpc XiangJia(PocRequest) returns (PocResponse) {}
+    // 定义相减方法
+    rpc XiangJian(PocRequest) returns (PocResponse) {}
+}
+
+// ArithRequest 请求结构
+message PocRequest {
+    int32 num1 = 1;
+    int32 num2 = 2;
+}
+
+// ArithResponse 响应结构
+message PocResponse {
+    int32 result = 1;
 }

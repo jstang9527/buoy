@@ -13,31 +13,31 @@ _sym_db = _symbol_database.Default()
 
 DESCRIPTOR = _descriptor.FileDescriptor(
     name='arith.proto',
-    package='mgolang',
+    package='grpc',
     syntax='proto3',
-    serialized_options=b'Z\007mgolang',
+    serialized_options=b'Z\004grpc',
     create_key=_descriptor._internal_create_key,
-    serialized_pb=b'\n\x0b\x61rith.proto\x12\x07mgolang\"*\n\x0c\x41rithRequest\x12\x0c\n\x04num1\x18\x01 \x01(\x05\x12\x0c\n\x04num2\x18\x02 \x01(\x05\"\x1f\n\rArithResponse\x12\x0e\n\x06result\x18\x01 \x01(\x05\x32\x82\x01\n\x05\x41rith\x12;\n\x08XiangJia\x12\x15.mgolang.ArithRequest\x1a\x16.mgolang.ArithResponse\"\x00\x12<\n\tXiangJian\x12\x15.mgolang.ArithRequest\x1a\x16.mgolang.ArithResponse\"\x00\x42\tZ\x07mgolangb\x06proto3'
+    serialized_pb=b'\n\x0b\x61rith.proto\x12\x04grpc\"*\n\x0c\x41rithRequest\x12\x0c\n\x04num1\x18\x01 \x01(\x05\x12\x0c\n\x04num2\x18\x02 \x01(\x05\"\x1f\n\rArithResponse\x12\x0e\n\x06result\x18\x01 \x01(\x05\x32v\n\x05\x41rith\x12\x35\n\x08XiangJia\x12\x12.grpc.ArithRequest\x1a\x13.grpc.ArithResponse\"\x00\x12\x36\n\tXiangJian\x12\x12.grpc.ArithRequest\x1a\x13.grpc.ArithResponse\"\x00\x42\x06Z\x04grpcb\x06proto3'
 )
 
 
 _ARITHREQUEST = _descriptor.Descriptor(
     name='ArithRequest',
-    full_name='mgolang.ArithRequest',
+    full_name='grpc.ArithRequest',
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
     create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
-            name='num1', full_name='mgolang.ArithRequest.num1', index=0,
+            name='num1', full_name='grpc.ArithRequest.num1', index=0,
             number=1, type=5, cpp_type=1, label=1,
             has_default_value=False, default_value=0,
             message_type=None, enum_type=None, containing_type=None,
             is_extension=False, extension_scope=None,
             serialized_options=None, file=DESCRIPTOR, create_key=_descriptor._internal_create_key),
         _descriptor.FieldDescriptor(
-            name='num2', full_name='mgolang.ArithRequest.num2', index=1,
+            name='num2', full_name='grpc.ArithRequest.num2', index=1,
             number=2, type=5, cpp_type=1, label=1,
             has_default_value=False, default_value=0,
             message_type=None, enum_type=None, containing_type=None,
@@ -55,21 +55,21 @@ _ARITHREQUEST = _descriptor.Descriptor(
     extension_ranges=[],
     oneofs=[
     ],
-    serialized_start=24,
-    serialized_end=66,
+    serialized_start=21,
+    serialized_end=63,
 )
 
 
 _ARITHRESPONSE = _descriptor.Descriptor(
     name='ArithResponse',
-    full_name='mgolang.ArithResponse',
+    full_name='grpc.ArithResponse',
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
     create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
-            name='result', full_name='mgolang.ArithResponse.result', index=0,
+            name='result', full_name='grpc.ArithResponse.result', index=0,
             number=1, type=5, cpp_type=1, label=1,
             has_default_value=False, default_value=0,
             message_type=None, enum_type=None, containing_type=None,
@@ -87,8 +87,8 @@ _ARITHRESPONSE = _descriptor.Descriptor(
     extension_ranges=[],
     oneofs=[
     ],
-    serialized_start=68,
-    serialized_end=99,
+    serialized_start=65,
+    serialized_end=96,
 )
 
 DESCRIPTOR.message_types_by_name['ArithRequest'] = _ARITHREQUEST
@@ -98,14 +98,14 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 ArithRequest = _reflection.GeneratedProtocolMessageType('ArithRequest', (_message.Message,), {
     'DESCRIPTOR': _ARITHREQUEST,
     '__module__': 'arith_pb2'
-    # @@protoc_insertion_point(class_scope:mgolang.ArithRequest)
+    # @@protoc_insertion_point(class_scope:grpc.ArithRequest)
 })
 _sym_db.RegisterMessage(ArithRequest)
 
 ArithResponse = _reflection.GeneratedProtocolMessageType('ArithResponse', (_message.Message,), {
     'DESCRIPTOR': _ARITHRESPONSE,
     '__module__': 'arith_pb2'
-    # @@protoc_insertion_point(class_scope:mgolang.ArithResponse)
+    # @@protoc_insertion_point(class_scope:grpc.ArithResponse)
 })
 _sym_db.RegisterMessage(ArithResponse)
 
@@ -114,17 +114,17 @@ DESCRIPTOR._options = None
 
 _ARITH = _descriptor.ServiceDescriptor(
     name='Arith',
-    full_name='mgolang.Arith',
+    full_name='grpc.Arith',
     file=DESCRIPTOR,
     index=0,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
-    serialized_start=102,
-    serialized_end=232,
+    serialized_start=98,
+    serialized_end=216,
     methods=[
         _descriptor.MethodDescriptor(
             name='XiangJia',
-            full_name='mgolang.Arith.XiangJia',
+            full_name='grpc.Arith.XiangJia',
             index=0,
             containing_service=None,
             input_type=_ARITHREQUEST,
@@ -134,7 +134,7 @@ _ARITH = _descriptor.ServiceDescriptor(
         ),
         _descriptor.MethodDescriptor(
             name='XiangJian',
-            full_name='mgolang.Arith.XiangJian',
+            full_name='grpc.Arith.XiangJian',
             index=1,
             containing_service=None,
             input_type=_ARITHREQUEST,

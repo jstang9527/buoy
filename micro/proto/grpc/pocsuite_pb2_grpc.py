@@ -2,10 +2,10 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from micro.proto.grpc import arith_pb2 as arith__pb2
+import pocsuite_pb2 as pocsuite__pb2
 
 
-class ArithStub(object):
+class PocScanStub(object):
     """定义算术服务
     """
 
@@ -16,18 +16,18 @@ class ArithStub(object):
             channel: A grpc.Channel.
         """
         self.XiangJia = channel.unary_unary(
-            '/grpc.Arith/XiangJia',
-            request_serializer=arith__pb2.ArithRequest.SerializeToString,
-            response_deserializer=arith__pb2.ArithResponse.FromString,
-        )
+                '/grpc.PocScan/XiangJia',
+                request_serializer=pocsuite__pb2.PocRequest.SerializeToString,
+                response_deserializer=pocsuite__pb2.PocResponse.FromString,
+                )
         self.XiangJian = channel.unary_unary(
-            '/grpc.Arith/XiangJian',
-            request_serializer=arith__pb2.ArithRequest.SerializeToString,
-            response_deserializer=arith__pb2.ArithResponse.FromString,
-        )
+                '/grpc.PocScan/XiangJian',
+                request_serializer=pocsuite__pb2.PocRequest.SerializeToString,
+                response_deserializer=pocsuite__pb2.PocResponse.FromString,
+                )
 
 
-class ArithServicer(object):
+class PocScanServicer(object):
     """定义算术服务
     """
 
@@ -46,51 +46,31 @@ class ArithServicer(object):
         raise NotImplementedError('Method not implemented!')
 
 
-def add_ArithServicer_to_server(servicer, server):
+def add_PocScanServicer_to_server(servicer, server):
     rpc_method_handlers = {
-        'XiangJia': grpc.unary_unary_rpc_method_handler(
-            servicer.XiangJia,
-            request_deserializer=arith__pb2.ArithRequest.FromString,
-            response_serializer=arith__pb2.ArithResponse.SerializeToString,
-        ),
-        'XiangJian': grpc.unary_unary_rpc_method_handler(
-            servicer.XiangJian,
-            request_deserializer=arith__pb2.ArithRequest.FromString,
-            response_serializer=arith__pb2.ArithResponse.SerializeToString,
-        ),
+            'XiangJia': grpc.unary_unary_rpc_method_handler(
+                    servicer.XiangJia,
+                    request_deserializer=pocsuite__pb2.PocRequest.FromString,
+                    response_serializer=pocsuite__pb2.PocResponse.SerializeToString,
+            ),
+            'XiangJian': grpc.unary_unary_rpc_method_handler(
+                    servicer.XiangJian,
+                    request_deserializer=pocsuite__pb2.PocRequest.FromString,
+                    response_serializer=pocsuite__pb2.PocResponse.SerializeToString,
+            ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-        'grpc.Arith', rpc_method_handlers)
+            'grpc.PocScan', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
-# This class is part of an EXPERIMENTAL API.
-class Arith(object):
+ # This class is part of an EXPERIMENTAL API.
+class PocScan(object):
     """定义算术服务
     """
 
     @staticmethod
-    def XiangJia(
-            request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None
-    ):
-        return grpc.experimental.unary_unary(
-            request, target, '/grpc.Arith/XiangJia',
-            arith__pb2.ArithRequest.SerializeToString,
-            arith__pb2.ArithResponse.FromString,
-            options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def XiangJian(
-            request,
+    def XiangJia(request,
             target,
             options=(),
             channel_credentials=None,
@@ -99,9 +79,24 @@ class Arith(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(
-            request, target, '/grpc.Arith/XiangJian',
-            arith__pb2.ArithRequest.SerializeToString,
-            arith__pb2.ArithResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/grpc.PocScan/XiangJia',
+            pocsuite__pb2.PocRequest.SerializeToString,
+            pocsuite__pb2.PocResponse.FromString,
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def XiangJian(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/grpc.PocScan/XiangJian',
+            pocsuite__pb2.PocRequest.SerializeToString,
+            pocsuite__pb2.PocResponse.FromString,
             options, channel_credentials,
             call_credentials, compression, wait_for_ready, timeout, metadata)
