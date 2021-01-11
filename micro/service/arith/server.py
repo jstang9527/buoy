@@ -22,7 +22,7 @@ class Arither(ArithServicer):
 
 
 class ArithServer(GRPCServiceBase):
-    def __init__(self, registry_host, registry_port, server_addr=None, server_port=None):
+    def __init__(self, registry_host, registry_port, server_addr, server_port=None):
         super(ArithServer, self).__init__(registry_host, registry_port, server_addr, server_port)
 
     def ListenAndServer(self):
@@ -36,7 +36,8 @@ class ArithServer(GRPCServiceBase):
         server.add_insecure_port("[::]:{}".format(self.server_port))
         server.start()
         # 1.注册服务
-        self.RegisterService("test_python3", "172.31.50.249", self.server_port)
+        # self.RegisterService("test_python3", "172.31.50.249", self.server_port)
+        self.RegisterService("test_python3", self.server_addr, self.server_port)
         try:
             while True:
                 time.sleep(100)
@@ -48,13 +49,13 @@ class ArithServer(GRPCServiceBase):
 def user_args():
     print("\033[33m\t\t---------- ArithServer ----------\033[0m")
     description = "\033[32mProvide Service of Airth by GRPC.\033[0m"
-    example = "\n\nexample:\n\t[-] 向注册中心(127.0.0.1:8500)注册主机(0.0.0.0:50051)服务:\n\t" \
-        "python3 server.py --registry_host 127.0.0.1 --registry_port 8500 --server_port 50051\n\t"
+    example = "\n\nexample:\n\t[-] 向注册中心(127.0.0.1:8500)注册主机(192.168.1.11:50051)服务:\n\t" \
+        "python3 server.py --registry_host 127.0.0.1 --registry_port 8500 --server_addr 192.168.1.11 --server_port 50051\n\t"
     description += example
     parser = argparse.ArgumentParser(description=description, prog='python2 main.py', formatter_class=RawTextHelpFormatter)                        # description参数可以用于插入描述脚本用途的信息，可以为空
     parser.add_argument('--registry_host', required=True, help='\tinput registry host')               # 添加--verbose标签，标签别名可以为-v，这里action的意思是当读取的参数中出现--verbose/-v的时候
     parser.add_argument('--registry_port', required=True, help='\tinput registry port')
-    parser.add_argument('--server_addr', required=False, help='\tinput server port')
+    parser.add_argument('--server_addr', required=True, help='\tinput server port')
     parser.add_argument('--server_port', type=int, required=False, help='\tinput server port')
 
     args = parser.parse_args(sys.argv[1:])                                             # 将变量以标签-值的字典形式存入args字典

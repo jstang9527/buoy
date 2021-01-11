@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"regexp"
 	"time"
@@ -64,8 +65,48 @@ func mapTest() {
 	fmt.Printf("%#v", val["aaa"])
 }
 
+// Info ...
+type Info struct {
+	VerifyInfo   map[string]string `json:"VerifyInfo"`
+	ExploitInfo  map[string]string `json:"ExploitInfo"`
+	WebshellInfo map[string]string `json:"WebshellInfo"`
+	TrojanInfo   map[string]string `json:"TrojanInfo"`
+}
+
+/*
+{
+	"VerifyInfo":{
+		"PostData":"\u003cstring\u003e/bin/bash\u003c/string\u003e\n \u003cstring\u003e-c\u003c/string\u003e\n \u003cstring\u003etouch xxx2.txt\u003c/string\u003e",
+		"Result":"Find Keyinfo In Response Data, Info: \u003cfaultcode\u003eS:Server\u003c/faultcode\u003e\u003cfaultstring\u003e0\u003c/faultstring\u003e",
+		"URL":"http://172.31.50.252:7001/wls-wsat/CoordinatorPortType?wsdl"
+	}
+}
+*/
+
+func jsonp() {
+	value := make(map[string]string, 3)
+	value["URL"] = "http://172.31.50.252:7001/wls-wsat/CoordinatorPortType?wsdl"
+	value["PostData"] = "<string>/bin/bash</string>\n <string>-c</string>\n <string>touch xxx2.txt</string>"
+	value["Result"] = "Find Keyinfo In Response Data, Info: <faultcode>S:Server</faultcode><faultstring>0</faultstring>"
+
+	info := &Info{
+		VerifyInfo:   value,
+		ExploitInfo:  value,
+		WebshellInfo: value,
+		TrojanInfo:   value,
+	}
+
+	data, err := json.Marshal(info)
+	if err != nil {
+		fmt.Println("json marshal failed!")
+		return
+	}
+	fmt.Printf("%s", data)
+}
+
 func main() {
-	reMethod()
+	jsonp()
+	// reMethod()
 	// TimeOutMethodTest()
 	// mapTest()
 }

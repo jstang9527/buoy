@@ -1,19 +1,8 @@
-import socket
-import random
+def main():
+    a = {"aa": '11', "cc": '33'}
+    if 'cc' in a.keys():
+        print(a['cc'])
 
 
-def test():
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    try:
-        while True:
-            port = random.randrange(50000, 59000)
-            result = sock.connect_ex(('127.0.0.1', port))
-            if result != 0:
-                print("Port is avaliable.")
-                return port
-    except Exception as e:
-        print("Failed Connect sock, info: ", e)
-        return False
-
-
-print(test())
+if __name__ == "__main__":
+    main()

@@ -4,21 +4,25 @@ package grpc;   // 指定默认包名
 // 指定golang包名
 option go_package = "grpc";
 
-// 定义算术服务
+// 定义Poc漏扫服务
 service PocScan {
-    // 定义相加方法
-    rpc XiangJia(PocRequest) returns (PocResponse) {}
-    // 定义相减方法
-    rpc XiangJian(PocRequest) returns (PocResponse) {}
+    // 定义验证方法
+    rpc Verify(PocRequest) returns (PocResponse) {}
 }
 
-// ArithRequest 请求结构
+// PocRequest 请求结构
 message PocRequest {
-    int32 num1 = 1;
-    int32 num2 = 2;
+    bool exploit = 1;
+    string target = 2;
+    string command = 3;
+    string asset_id = 4;
+    repeated string poc_plugins = 5; 
 }
 
-// ArithResponse 响应结构
+// PocResponse 响应结构
 message PocResponse {
-    int32 result = 1;
+    map<string, string> VerifyInfo = 1;
+    map<string, string> ExploitInfo = 2;
+    map<string, string> WebshellInfo = 3;
+    map<string, string> TrojanInfo = 4;
 }

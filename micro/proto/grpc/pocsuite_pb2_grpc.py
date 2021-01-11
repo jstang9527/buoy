@@ -2,11 +2,11 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import pocsuite_pb2 as pocsuite__pb2
+from micro.proto.grpc import pocsuite_pb2 as pocsuite__pb2
 
 
 class PocScanStub(object):
-    """定义算术服务
+    """定义Poc漏扫服务
     """
 
     def __init__(self, channel):
@@ -15,31 +15,19 @@ class PocScanStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.XiangJia = channel.unary_unary(
-                '/grpc.PocScan/XiangJia',
-                request_serializer=pocsuite__pb2.PocRequest.SerializeToString,
-                response_deserializer=pocsuite__pb2.PocResponse.FromString,
-                )
-        self.XiangJian = channel.unary_unary(
-                '/grpc.PocScan/XiangJian',
+        self.Verify = channel.unary_unary(
+                '/grpc.PocScan/Verify',
                 request_serializer=pocsuite__pb2.PocRequest.SerializeToString,
                 response_deserializer=pocsuite__pb2.PocResponse.FromString,
                 )
 
 
 class PocScanServicer(object):
-    """定义算术服务
+    """定义Poc漏扫服务
     """
 
-    def XiangJia(self, request, context):
-        """定义相加方法
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def XiangJian(self, request, context):
-        """定义相减方法
+    def Verify(self, request, context):
+        """定义验证方法
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -48,13 +36,8 @@ class PocScanServicer(object):
 
 def add_PocScanServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'XiangJia': grpc.unary_unary_rpc_method_handler(
-                    servicer.XiangJia,
-                    request_deserializer=pocsuite__pb2.PocRequest.FromString,
-                    response_serializer=pocsuite__pb2.PocResponse.SerializeToString,
-            ),
-            'XiangJian': grpc.unary_unary_rpc_method_handler(
-                    servicer.XiangJian,
+            'Verify': grpc.unary_unary_rpc_method_handler(
+                    servicer.Verify,
                     request_deserializer=pocsuite__pb2.PocRequest.FromString,
                     response_serializer=pocsuite__pb2.PocResponse.SerializeToString,
             ),
@@ -66,11 +49,11 @@ def add_PocScanServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class PocScan(object):
-    """定义算术服务
+    """定义Poc漏扫服务
     """
 
     @staticmethod
-    def XiangJia(request,
+    def Verify(request,
             target,
             options=(),
             channel_credentials=None,
@@ -79,23 +62,7 @@ class PocScan(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/grpc.PocScan/XiangJia',
-            pocsuite__pb2.PocRequest.SerializeToString,
-            pocsuite__pb2.PocResponse.FromString,
-            options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def XiangJian(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/grpc.PocScan/XiangJian',
+        return grpc.experimental.unary_unary(request, target, '/grpc.PocScan/Verify',
             pocsuite__pb2.PocRequest.SerializeToString,
             pocsuite__pb2.PocResponse.FromString,
             options, channel_credentials,

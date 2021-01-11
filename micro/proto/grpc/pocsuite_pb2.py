@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'Z\004grpc',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x0epocsuite.proto\x12\x04grpc\"(\n\nPocRequest\x12\x0c\n\x04num1\x18\x01 \x01(\x05\x12\x0c\n\x04num2\x18\x02 \x01(\x05\"\x1d\n\x0bPocResponse\x12\x0e\n\x06result\x18\x01 \x01(\x05\x32p\n\x07PocScan\x12\x31\n\x08XiangJia\x12\x10.grpc.PocRequest\x1a\x11.grpc.PocResponse\"\x00\x12\x32\n\tXiangJian\x12\x10.grpc.PocRequest\x1a\x11.grpc.PocResponse\"\x00\x42\x06Z\x04grpcb\x06proto3'
+  serialized_pb=b'\n\x0epocsuite.proto\x12\x04grpc\"e\n\nPocRequest\x12\x0f\n\x07\x65xploit\x18\x01 \x01(\x08\x12\x0e\n\x06target\x18\x02 \x01(\t\x12\x0f\n\x07\x63ommand\x18\x03 \x01(\t\x12\x10\n\x08\x61sset_id\x18\x04 \x01(\t\x12\x13\n\x0bpoc_plugins\x18\x05 \x03(\t\"\xbe\x03\n\x0bPocResponse\x12\x35\n\nVerifyInfo\x18\x01 \x03(\x0b\x32!.grpc.PocResponse.VerifyInfoEntry\x12\x37\n\x0b\x45xploitInfo\x18\x02 \x03(\x0b\x32\".grpc.PocResponse.ExploitInfoEntry\x12\x39\n\x0cWebshellInfo\x18\x03 \x03(\x0b\x32#.grpc.PocResponse.WebshellInfoEntry\x12\x35\n\nTrojanInfo\x18\x04 \x03(\x0b\x32!.grpc.PocResponse.TrojanInfoEntry\x1a\x31\n\x0fVerifyInfoEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x1a\x32\n\x10\x45xploitInfoEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x1a\x33\n\x11WebshellInfoEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x1a\x31\n\x0fTrojanInfoEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x32:\n\x07PocScan\x12/\n\x06Verify\x12\x10.grpc.PocRequest\x1a\x11.grpc.PocResponse\"\x00\x42\x06Z\x04grpcb\x06proto3'
 )
 
 
@@ -34,16 +34,37 @@ _POCREQUEST = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='num1', full_name='grpc.PocRequest.num1', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
+      name='exploit', full_name='grpc.PocRequest.exploit', index=0,
+      number=1, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='num2', full_name='grpc.PocRequest.num2', index=1,
-      number=2, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
+      name='target', full_name='grpc.PocRequest.target', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='command', full_name='grpc.PocRequest.command', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='asset_id', full_name='grpc.PocRequest.asset_id', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='poc_plugins', full_name='grpc.PocRequest.poc_plugins', index=4,
+      number=5, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -60,9 +81,161 @@ _POCREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=24,
-  serialized_end=64,
+  serialized_end=125,
 )
 
+
+_POCRESPONSE_VERIFYINFOENTRY = _descriptor.Descriptor(
+  name='VerifyInfoEntry',
+  full_name='grpc.PocResponse.VerifyInfoEntry',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='key', full_name='grpc.PocResponse.VerifyInfoEntry.key', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='value', full_name='grpc.PocResponse.VerifyInfoEntry.value', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=b'8\001',
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=369,
+  serialized_end=418,
+)
+
+_POCRESPONSE_EXPLOITINFOENTRY = _descriptor.Descriptor(
+  name='ExploitInfoEntry',
+  full_name='grpc.PocResponse.ExploitInfoEntry',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='key', full_name='grpc.PocResponse.ExploitInfoEntry.key', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='value', full_name='grpc.PocResponse.ExploitInfoEntry.value', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=b'8\001',
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=420,
+  serialized_end=470,
+)
+
+_POCRESPONSE_WEBSHELLINFOENTRY = _descriptor.Descriptor(
+  name='WebshellInfoEntry',
+  full_name='grpc.PocResponse.WebshellInfoEntry',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='key', full_name='grpc.PocResponse.WebshellInfoEntry.key', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='value', full_name='grpc.PocResponse.WebshellInfoEntry.value', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=b'8\001',
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=472,
+  serialized_end=523,
+)
+
+_POCRESPONSE_TROJANINFOENTRY = _descriptor.Descriptor(
+  name='TrojanInfoEntry',
+  full_name='grpc.PocResponse.TrojanInfoEntry',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='key', full_name='grpc.PocResponse.TrojanInfoEntry.key', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='value', full_name='grpc.PocResponse.TrojanInfoEntry.value', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=b'8\001',
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=525,
+  serialized_end=574,
+)
 
 _POCRESPONSE = _descriptor.Descriptor(
   name='PocResponse',
@@ -73,16 +246,37 @@ _POCRESPONSE = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='result', full_name='grpc.PocResponse.result', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
+      name='VerifyInfo', full_name='grpc.PocResponse.VerifyInfo', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='ExploitInfo', full_name='grpc.PocResponse.ExploitInfo', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='WebshellInfo', full_name='grpc.PocResponse.WebshellInfo', index=2,
+      number=3, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='TrojanInfo', full_name='grpc.PocResponse.TrojanInfo', index=3,
+      number=4, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
-  nested_types=[],
+  nested_types=[_POCRESPONSE_VERIFYINFOENTRY, _POCRESPONSE_EXPLOITINFOENTRY, _POCRESPONSE_WEBSHELLINFOENTRY, _POCRESPONSE_TROJANINFOENTRY, ],
   enum_types=[
   ],
   serialized_options=None,
@@ -91,10 +285,18 @@ _POCRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=66,
-  serialized_end=95,
+  serialized_start=128,
+  serialized_end=574,
 )
 
+_POCRESPONSE_VERIFYINFOENTRY.containing_type = _POCRESPONSE
+_POCRESPONSE_EXPLOITINFOENTRY.containing_type = _POCRESPONSE
+_POCRESPONSE_WEBSHELLINFOENTRY.containing_type = _POCRESPONSE
+_POCRESPONSE_TROJANINFOENTRY.containing_type = _POCRESPONSE
+_POCRESPONSE.fields_by_name['VerifyInfo'].message_type = _POCRESPONSE_VERIFYINFOENTRY
+_POCRESPONSE.fields_by_name['ExploitInfo'].message_type = _POCRESPONSE_EXPLOITINFOENTRY
+_POCRESPONSE.fields_by_name['WebshellInfo'].message_type = _POCRESPONSE_WEBSHELLINFOENTRY
+_POCRESPONSE.fields_by_name['TrojanInfo'].message_type = _POCRESPONSE_TROJANINFOENTRY
 DESCRIPTOR.message_types_by_name['PocRequest'] = _POCREQUEST
 DESCRIPTOR.message_types_by_name['PocResponse'] = _POCRESPONSE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -107,14 +309,50 @@ PocRequest = _reflection.GeneratedProtocolMessageType('PocRequest', (_message.Me
 _sym_db.RegisterMessage(PocRequest)
 
 PocResponse = _reflection.GeneratedProtocolMessageType('PocResponse', (_message.Message,), {
+
+  'VerifyInfoEntry' : _reflection.GeneratedProtocolMessageType('VerifyInfoEntry', (_message.Message,), {
+    'DESCRIPTOR' : _POCRESPONSE_VERIFYINFOENTRY,
+    '__module__' : 'pocsuite_pb2'
+    # @@protoc_insertion_point(class_scope:grpc.PocResponse.VerifyInfoEntry)
+    })
+  ,
+
+  'ExploitInfoEntry' : _reflection.GeneratedProtocolMessageType('ExploitInfoEntry', (_message.Message,), {
+    'DESCRIPTOR' : _POCRESPONSE_EXPLOITINFOENTRY,
+    '__module__' : 'pocsuite_pb2'
+    # @@protoc_insertion_point(class_scope:grpc.PocResponse.ExploitInfoEntry)
+    })
+  ,
+
+  'WebshellInfoEntry' : _reflection.GeneratedProtocolMessageType('WebshellInfoEntry', (_message.Message,), {
+    'DESCRIPTOR' : _POCRESPONSE_WEBSHELLINFOENTRY,
+    '__module__' : 'pocsuite_pb2'
+    # @@protoc_insertion_point(class_scope:grpc.PocResponse.WebshellInfoEntry)
+    })
+  ,
+
+  'TrojanInfoEntry' : _reflection.GeneratedProtocolMessageType('TrojanInfoEntry', (_message.Message,), {
+    'DESCRIPTOR' : _POCRESPONSE_TROJANINFOENTRY,
+    '__module__' : 'pocsuite_pb2'
+    # @@protoc_insertion_point(class_scope:grpc.PocResponse.TrojanInfoEntry)
+    })
+  ,
   'DESCRIPTOR' : _POCRESPONSE,
   '__module__' : 'pocsuite_pb2'
   # @@protoc_insertion_point(class_scope:grpc.PocResponse)
   })
 _sym_db.RegisterMessage(PocResponse)
+_sym_db.RegisterMessage(PocResponse.VerifyInfoEntry)
+_sym_db.RegisterMessage(PocResponse.ExploitInfoEntry)
+_sym_db.RegisterMessage(PocResponse.WebshellInfoEntry)
+_sym_db.RegisterMessage(PocResponse.TrojanInfoEntry)
 
 
 DESCRIPTOR._options = None
+_POCRESPONSE_VERIFYINFOENTRY._options = None
+_POCRESPONSE_EXPLOITINFOENTRY._options = None
+_POCRESPONSE_WEBSHELLINFOENTRY._options = None
+_POCRESPONSE_TROJANINFOENTRY._options = None
 
 _POCSCAN = _descriptor.ServiceDescriptor(
   name='PocScan',
@@ -123,23 +361,13 @@ _POCSCAN = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=97,
-  serialized_end=209,
+  serialized_start=576,
+  serialized_end=634,
   methods=[
   _descriptor.MethodDescriptor(
-    name='XiangJia',
-    full_name='grpc.PocScan.XiangJia',
+    name='Verify',
+    full_name='grpc.PocScan.Verify',
     index=0,
-    containing_service=None,
-    input_type=_POCREQUEST,
-    output_type=_POCRESPONSE,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
-  _descriptor.MethodDescriptor(
-    name='XiangJian',
-    full_name='grpc.PocScan.XiangJian',
-    index=1,
     containing_service=None,
     input_type=_POCREQUEST,
     output_type=_POCRESPONSE,
