@@ -18,6 +18,9 @@ const (
 	HTTPRuleTypePrefixURL = 0
 	// HTTPRuleTypeDomain 域名接入
 	HTTPRuleTypeDomain = 1
+
+	// PocPluginFilePath ...
+	PocPluginFilePath = "micro/service/asset_scanner/poc_plugins/"
 )
 
 var (

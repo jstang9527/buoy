@@ -7,9 +7,13 @@ import (
 
 // TrojanItemOutput 木马服务
 type TrojanItemOutput struct {
-	AssetID   string `json:"asset_id" form:"asset_id"`
-	AssetName string `json:"asset_name" form:"asset_name"`
-	IsConn    int8   `json:"is_Conn" form:"is_Conn"`
+	AssetID    int64  `json:"asset_id" form:"asset_id"`
+	AssetIP    string `json:"asset_name" form:"asset_name"`
+	PortID     int64  `json:"port_id" form:"Port_id"`
+	PortName   string `json:"port_name" form:"port_name"`
+	RealServer string `json:"real_server" form:"real_server"`
+	CreateAT   string `json:"create_at" form:"create_at"`
+	SpareLine  int8   `json:"line" form:"line"` // 1是容器、穿透, 2是主机,直通
 }
 
 // TrojanListOutput ...
@@ -25,7 +29,7 @@ type TrojanConnInput struct {
 	SpareLine int8   `json:"line" form:"line" comment:"连接线路" example:"0" validate:"required"`
 }
 
-// BindValidParam 校验新增参数,绑定结构体,校验参数
-func (s *TrojanConnInput) BindValidParam(c *gin.Context) error {
+// GetValidParam 校验新增参数,绑定结构体,校验参数
+func (s *TrojanConnInput) GetValidParam(c *gin.Context) error {
 	return utils.DefaultGetValidParams(c, s)
 }

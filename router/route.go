@@ -1,10 +1,14 @@
 package router
 
 import (
+	"log"
+
 	"github.com/e421083458/golang_common/lib"
+	"github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"github.com/jstang9527/buoy/controller"
 	"github.com/jstang9527/buoy/docs"
+
 	"github.com/jstang9527/buoy/middleware"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
@@ -27,13 +31,95 @@ func InitRouter(middlewares ...gin.HandlerFunc) *gin.Engine {
 	})
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
-	demoRouter := router.Group("/demo")
-	demoRouter.Use(
+	adminLoginRouter := router.Group("/admin_login")
+	store, err := sessions.NewRedisStore(10, "tcp", lib.GetStringConf("base.session.redis_server"), lib.GetStringConf("base.session.redis_password"), []byte("secret"))
+	if err != nil {
+		log.Fatalf("sessions.NewRedisStore err:%v", err)
+	}
+	adminLoginRouter.Use(
+		sessions.Sessions("mysession", store),
 		middleware.RecoveryMiddleware(),
 		middleware.RequestLog(),
-		// middleware.IPAuthMiddleware(),
+		middleware.TranslationMiddleware())
+	{
+		controller.AdminLoginRegister(adminLoginRouter)
+	}
+
+	adminRouter := router.Group("/admin")
+	adminRouter.Use(
+		sessions.Sessions("mysession", store),
+		middleware.RecoveryMiddleware(),
+		middleware.RequestLog(),
+		middleware.SessionAuthMiddleware(),
+		middleware.TranslationMiddleware())
+	{
+		controller.AdminRegister(adminRouter)
+	}
+
+	// 大盘
+	DashboardRouter := router.Group("/dashboard")
+	DashboardRouter.Use(
+		sessions.Sessions("mysession", store),
+		middleware.RecoveryMiddleware(),
+		middleware.RequestLog(),
+		middleware.SessionAuthMiddleware(),
+		middleware.TranslationMiddleware(),
 	)
-	controller.DemoRegister(demoRouter)
+	{
+		controller.DashboardRegister(DashboardRouter)
+	}
+
+	// 任务
+	TaskRouter := router.Group("/task")
+	TaskRouter.Use(
+		sessions.Sessions("mysession", store),
+		middleware.RecoveryMiddleware(),
+		middleware.RequestLog(),
+		middleware.SessionAuthMiddleware(),
+		middleware.TranslationMiddleware(),
+	)
+	{
+		controller.TaskRegister(TaskRouter)
+	}
+
+	// 资产管理
+	AssetRouter := router.Group("/asset")
+	AssetRouter.Use(
+		sessions.Sessions("mysession", store),
+		middleware.RecoveryMiddleware(),
+		middleware.RequestLog(),
+		middleware.SessionAuthMiddleware(),
+		middleware.TranslationMiddleware(),
+	)
+	{
+		controller.AssetRegister(AssetRouter)
+	}
+
+	// 漏洞管理
+	VulRouter := router.Group("/vul")
+	VulRouter.Use(
+		sessions.Sessions("mysession", store),
+		middleware.RecoveryMiddleware(),
+		middleware.RequestLog(),
+		middleware.SessionAuthMiddleware(),
+		middleware.TranslationMiddleware(),
+	)
+	{
+		controller.VulRegister(VulRouter)
+	}
+
+	// 蜜罐识别
+	TrapRouter := router.Group("/trap")
+	TrapRouter.Use(
+		sessions.Sessions("mysession", store),
+		middleware.RecoveryMiddleware(),
+		middleware.RequestLog(),
+		middleware.SessionAuthMiddleware(),
+		middleware.TranslationMiddleware(),
+	)
+	{
+		controller.TrapRegister(TrapRouter)
+	}
 
 	// trojan
 	trojanRouter := router.Group("/trojan")

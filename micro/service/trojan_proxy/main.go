@@ -81,16 +81,21 @@ func (p *Proxy) Run() {
 }
 
 func (p *Proxy) execMsg(msg string) string {
-	cmd := exec.Command("/bin/bash", "-c", msg)
-
-	var out bytes.Buffer // 读取io.Writer类型的cmd.Stdout，再通过bytes.Buffer(缓冲byte类型的缓冲器)将 \
-	cmd.Stdout = &out    // byte类型转化为string类型(out.String():这是bytes类型提供的接口)
-
+	linux := exec.Command("/bin/bash", "-c", msg)
+	var lout bytes.Buffer // 读取io.Writer类型的cmd.Stdout，再通过bytes.Buffer(缓冲byte类型的缓冲器)将 \
+	linux.Stdout = &lout  // byte类型转化为string类型(out.String():这是bytes类型提供的接口)
 	//Run执行c包含的命令，并阻塞直到完成。  这里stdout被取出，cmd.Wait()无法正确获取stdin,stdout,stderr，则阻塞在那了
-	if err := cmd.Run(); err != nil {
-		return fmt.Sprint(err)
+	if err := linux.Run(); err == nil {
+		return lout.String()
 	}
-	return out.String()
+
+	win := exec.Command("cmd", msg)
+	var wout bytes.Buffer
+	win.Stdout = &wout
+	if err := win.Run(); err != nil {
+		return fmt.Sprintf("Failed exec command, info: %v", err)
+	}
+	return wout.String()
 }
 
 // go run main.go --registry_address 172.31.50.249:8500

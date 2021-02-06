@@ -1,20 +1,27 @@
 package utils
 
 import (
+	"fmt"
 	"regexp"
+	"strconv"
 
 	"github.com/micro/go-micro/registry"
 )
 
-// TrojanInfoHandler 处理Torjan微服务并返回信息
-func TrojanInfoHandler(value *registry.Service) (string, string, int) {
+// TrojanInfoHandler 处理Torjan服务并返回信息
+func TrojanInfoHandler(value *registry.Service) (portID int64, err error) {
 	// fmt.Printf("%#v\n", service)
 	// fmt.Printf("%v - %v - %v - %v\n", service.Name(), service.Options(), service.String(), service.Server().Options().Metadata)
 	// regexp
-	re, _ := regexp.Compile("^\\w{24}")
+	fmt.Println(value.Name)
+	re, _ := regexp.Compile("^\\d+")
 	if !re.MatchString(value.Name) {
-		return value.Name, "unkwon_service", 1
+		return 0, fmt.Errorf("not trojan service")
 	}
-
-	return value.Name, "todo", 0 // 目前仅需返回ID即可
+	fmt.Println("acooo", value.Name)
+	a, err := strconv.Atoi(value.Name)
+	if err != nil {
+		return 0, err
+	}
+	return int64(a), nil
 }

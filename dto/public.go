@@ -10,8 +10,8 @@ type PublicIDInput struct {
 	ID int64 `json:"id" form:"id" comment:"target_id" example:"22" validate:"required"` // 服务ID
 }
 
-// BindValidParam 校验新增参数,绑定结构体,校验参数
-func (s *PublicIDInput) BindValidParam(c *gin.Context) error {
+// GetValidParams 校验新增参数,绑定结构体,校验参数
+func (s *PublicIDInput) GetValidParams(c *gin.Context) error {
 	return utils.DefaultGetValidParams(c, s)
 }
 
@@ -22,7 +22,7 @@ type PublicListInput struct {
 	Limit int    `json:"limit" form:"limit" comment:"每页条数" example:"20" validate:"required"` // 每页条数
 }
 
-// BindValidParam 校验新增参数,绑定结构体,校验参数
-func (s *PublicListInput) BindValidParam(c *gin.Context) error {
+// GetValidParams 校验新增参数,绑定结构体,校验参数
+func (s *PublicListInput) GetValidParams(c *gin.Context) error {
 	return utils.DefaultGetValidParams(c, s)
 }
