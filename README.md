@@ -1,6 +1,5 @@
 # buoy 攻击面暴露系统
 
-
 # 一、程序功能
 ### 1.1 资产收集
 |||
@@ -72,23 +71,21 @@
 ||	支持蜜罐识别插件的管理(CURD)
 
 # 二、主要功能演示(GIF)
-### 2.1 攻击面暴露探测
-### 2.2 漏洞利用
-### 2.3 后渗透
+详情请看说明书.docx
 
 # 三、程序部署
 ### 3.1 Redis服务
 [root@localhost buoy]# docker run -itd -p 6379:6379 --name redis redis
 ### 3.2 Mysql服务
-启动mysql服务
+启动mysql服务  
 [root@localhost buoy]# docker run -itd -p 3306:3306 --mame mysql mysql:5.7
 使用备份库进行恢复
-[root@localhost buoy]# docker cp database.sql mysql:/root
-[root@localhost buoy]# docker exec -it mysql /bin/bash
-root@63xeqdar98d7w7ed ~# mysql -uroot -p
-mysql> create database buoy;
-mysql> use buoy;
-mysql> source /root/database.sql;
+[root@localhost buoy]# docker cp database.sql mysql:/root  
+[root@localhost buoy]# docker exec -it mysql /bin/bash  
+root@63xeqdar98d7w7ed ~# mysql -uroot -p  
+mysql> create database buoy;  
+mysql> use buoy;  
+mysql> source /root/database.sql;  
 ### 3.2 注册中心
 [root@localhost buoy]# docker run -itd -p 8300:8300 -p 8301:8301 -p 8301:8301/udp -p 8302:8302 -p8400:8400 -p 8500:8500 -p 53:53/udp --name consul consul
 
@@ -105,9 +102,9 @@ mysql> source /root/database.sql;
 [root@localhost buoy]# ./buoy  
 
 ### 3.4 从节点部署
-Python库安装：pip3 install -r requirement.txt
-工具安装: yum install hydra nmap -y
-配置修改: settings.py
+Python库安装：pip3 install -r requirement.txt  
+工具安装: yum install hydra nmap -y  
+配置修改: settings.py  
 ```shell
 Python3 main.py agent \
     --registry_host   \     # 服务注册中心主机('172.16.4.10')
@@ -118,11 +115,11 @@ Python3 main.py agent \
 Example: python3 main.py agent --registry_host 172.31.x.x --registry_port 8500 --server_name asset_scanner --server_addr 172.31.x.x
 ```
 ### 3.5 Web前端部署
-Docker部署(主要修改vue.config.js第43行proxy-target)
+Docker部署(主要修改vue.config.js第43行proxy-target)  
 [root@localhost ~]# docker run -itd -v /home/views/buoy-view/vue.config.js:/opt/vue.config.js -p 9527:9527 --name buoy-view jstang/buoy-view:2.0  
-源码部署
-git clone https://github.com/jstang9527/buoy-view
-npm run dev
+源码部署  
+git clone https://github.com/jstang9527/buoy-view  
+npm run dev  
 
 ### 3.6 API接口文档
-访问地址: http://127.0.0.1:8700/swagger/index.html
+访问地址: http://127.0.0.1:8700/swagger/index.html  
